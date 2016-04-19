@@ -1,0 +1,5 @@
+1,doublebed
+2,doublebed
+3,doublebed
+4,doublebed
+5,queen
