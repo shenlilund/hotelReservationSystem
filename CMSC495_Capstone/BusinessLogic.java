@@ -4,6 +4,7 @@
 
 public class BusinessLogic
 {
+  //class variables ------------------------------------------------------------
   private int customer; //TODO Why are these ints? Shouldn't they be objects? like private Customer customer;
   private int room;
   private int customerID;
@@ -18,10 +19,69 @@ public class BusinessLogic
   private String lastName;
   private String address;
 
-
-  public int createReservation()
+  //getters and setters --------------------------------------------------------
+  public Date getCheckIn()
   {
-    
+    return checkInDate;
+  }
+  public void setCheckin(Date d)
+  {
+    checkInDate = d;
+  }
+
+  public Date getCheckOut()
+  {
+    return checkOutDate;
+  }
+  public void setCheckOut(Date d)
+  {
+      checkOutDate = d;
+  }
+
+
+  //class methods --------------------------------------------------------------
+  public Reservation createReservation(int customerId, int roomNumber, int numberOfOccupants, DateTime checkinDate, DateTime checkoutDate)
+  {
+    Reservation newRes = new Reservation()
+
+
+    // Create Reservation Object;
+  	// CustomerId = customerId;
+  	// RoomNumber = roomNumber;
+  	// NumberOfOccupants = numberOfOccupants;
+  	// CheckinDate = checkinDate;
+  	// CheckoutDate = checkoutDate;
+  	// Call ReservationDatabaseManager.Create(Reservation);
+  }
+
+  public void editReservation()
+  {
+
+  }
+
+  public String findAvailableRooms()
+  {
+
+  }
+
+  public int createRoom()
+  {
+
+  }
+
+  public void editRoom()
+  {
+
+  }
+
+  public int createCustomer()
+  {
+
+  }
+
+  public void editCustomer()
+  {
+
   }
 
 }
