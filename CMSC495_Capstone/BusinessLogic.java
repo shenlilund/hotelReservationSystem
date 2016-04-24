@@ -56,6 +56,8 @@ public class BusinessLogic
 
 
   //class methods --------------------------------------------------------------
+
+  //Reservaitons
   public Reservation createReservation(int customerId, int roomNumber, int numberOfOccupants, DateTime checkinDate, DateTime checkoutDate)
   {
     Reservation newRes = null;
@@ -69,9 +71,11 @@ public class BusinessLogic
     reservations.Edit(tempRes);
   }
 
-  //TODO Not complete, will come back later
+  //Rooms
+
   public Room[] findAvailableRooms(checkin, checkout, roomType)
   {
+    //TODO Not complete, will come back later
     ArrayList<Reservation> listOfRes = reservations.GetAll();
     ArrayList<Room> listOfRooms = rooms.GetAll();
 
@@ -85,22 +89,36 @@ public class BusinessLogic
 
   public int createRoom()
   {
-
+    Room r = new Room();
+    // 2. RoomType = type;
+    rooms.Create(r);
   }
 
-  public void editRoom()
+  public void editRoom(int roomNumber)
   {
-
+    Room r = rooms.Get(roomNumber);
+    // 2. RoomType = type;
+    rooms.Create(r);
   }
 
-  public int createCustomer()
+  //Customers
+  public int createCustomer(String lastName, String firstName, String address)
   {
-
+    Customer c = new Customer();
+    c.SetLastName(lastName);
+    c.SetFirstName(firstName);
+    c.SetStreetAddress(address);
+    customers.Create(c);
+    //return customerId
   }
 
-  public void editCustomer()
+  public void editCustomer(int customerID, String lastName, String firstName, String address)
   {
-
+    Customer c = customers.Get(customerID);
+    c.SetLastName(lastName);
+    c.SetFirstName(firstName);
+    c.SetStreetAddress(address);
+    customers.Edit(c);
   }
 
 }
