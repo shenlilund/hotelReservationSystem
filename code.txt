@@ -1,0 +1,119 @@
+/*
+ *To display a user first name, last name, State of Birth and Gender
+ * File name: Login
+ * Celin Tadjion
+ * 04/22/2016
+* Note: the program works with a limited list of states which are "Maryland", "Virginia",
+ * "New Jersey", "Arizona
+ */
+package login;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class Login extends JFrame {
+
+     private JLabel jlbEnterFirst = new JLabel("Enter First", JLabel.CENTER);
+     private JTextField jtfEnterFirst = new JTextField(12);
+     private JLabel jlbEnterLast = new JLabel("Enter Last", JLabel.CENTER);
+     private JTextField jtfEnterLast = new JTextField(12);
+
+    String statesName;
+     private JButton jbtEnter = new JButton("Enter");
+     private JTextField jtfEnter = new JTextField(12);
+             
+     private JLabel jlbSelectStateOfBirth = new JLabel("Select State of Birth");
+     private  JLabel jlbSelectGender = new JLabel("Select gender:");
+        //Declare an array of strings for the list of states
+   
+   JComboBox jcbSelect = new JComboBox(new String[]{" ", "Maryland", "Virginia",
+  "New Jersey", "Arizona"});
+String[] States = {" ", "Maryland", "Virginia", "New Jersey", "Arizona"};
+    JRadioButton theFirstButton = new JRadioButton("Male");
+    JRadioButton theSecondButton = new JRadioButton("Female");
+    
+  JPanel jpRadiobuttons = new JPanel(new GridLayout(2, 1));
+ 
+ private  JLabel jbtSubmit = new JLabel("Submit");
+ private JTextArea jtaSubmit = new JTextArea(5, 12);
+
+     public static void main(String[] args){
+         
+Login frame = new Login();
+
+    frame.setTitle("User's Information");
+
+    frame.setLocationRelativeTo(null); // Center the frame
+    frame.setSize(240, 260); 
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setVisible(true);
+       }
+     public Login(){
+ jtfEnter.setEditable(false);    
+jtaSubmit.setEditable(false);    
+jtaSubmit.setLineWrap(true);
+jtaSubmit.setWrapStyleWord(true);
+jtaSubmit.setForeground(Color.blue);
+jtaSubmit.setFont(new Font("Calibri", Font.BOLD, 14));
+          //Create panel2 to hold labels, textfield, and combo
+     JPanel panel2 = new JPanel();
+    
+      panel2.add(jlbEnterFirst);
+      panel2.add(jtfEnterFirst);
+      panel2.add(jlbEnterLast); 
+      panel2.add(jtfEnterLast);
+      
+      panel2.add(jbtEnter);
+      panel2.add(jtfEnter);
+          panel2.add(jlbSelectStateOfBirth);
+      panel2.add(jcbSelect);
+      panel2.add(jlbSelectGender);
+           //Group radio buttons
+     ButtonGroup group = new ButtonGroup();
+     add(new Label("Select gender:"));
+group.add(theFirstButton);
+group.add(theSecondButton);
+panel2.add(theFirstButton);
+panel2.add(theSecondButton);
+
+panel2.add(jbtSubmit);
+panel2.add(jtaSubmit);
+        add(jpRadiobuttons); 
+        add(panel2);
+    
+      //create and register listener
+  jbtEnter.addActionListener(new ActionListener() {
+  @Override
+  public void actionPerformed
+ (ActionEvent e) {
+  System.out.println("");
+
+//declare variables
+            String enterFirst = jtfEnterFirst.getText();
+            String enterLast = jtfEnterLast.getText();
+            String fullName =  enterFirst + " " + enterLast;
+            String gender = "";
+           {                  
+  jtfEnter.setText("Welcome " + fullName); 
+       if(theFirstButton.isSelected()) { 
+      gender = "male";
+      jtaSubmit.setText(fullName + " " + "and " + " " + "Gender: " + gender);
+          }
+      else if(theSecondButton.isSelected())  {
+         gender = "female";
+  } 
+            String data = "";
+     if (jcbSelect.getSelectedIndex() != -1) {                     
+          data = "Name: " + "" + fullName + "," + "" + " " +
+         "Gender: "  + " " + gender + " " + " " + ", and " + "State of Birth: " 
+                  + jcbSelect.getItemAt
+                    (jcbSelect.getSelectedIndex());  
+               jtaSubmit.setText(data);
+            }              
+     
+         }
+}
+      }); 
+  
+ }
+          
+}
