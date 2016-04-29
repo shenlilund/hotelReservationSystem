@@ -23,16 +23,16 @@ public class BusinessLogic
   // private String lastName;
   // private String address;
 
-  ReservationDatabaseManager reservations;
-  RoomDatabaseManager rooms;
-  CustomerDatabaseManager customers;
+  ReservationDatabaseManager resManager;
+  RoomDatabaseManager roomManager;
+  CustomerDatabaseManager customerManager;
 
   //constructor
   public BusinessLogic()
   {
-    reservations = new ReservationDatabaseManager();
-    rooms = new RoomDatabaseManager();
-    customers = new CustomerDatabaseManager();
+    resManager = new ReservationDatabaseManager();
+    roomManager = new RoomDatabaseManager();
+    customerManager = new CustomerDatabaseManager();
   }
 
   //getters and setters --------------------------------------------------------
@@ -57,68 +57,94 @@ public class BusinessLogic
 
   //class methods --------------------------------------------------------------
 
-  //Reservaitons
+  //Reservations
+
   public Reservation createReservation(int customerId, int roomNumber, int numberOfOccupants, DateTime checkinDate, DateTime checkoutDate)
   {
     Reservation newRes = null;
-    reservations.Create(newRes);
+    resManager.Create(newRes);
   }
 
   //pass in all items, and it will replace the existing reservation with this new one
   public void editReservation(int reservationId, int customerId, int roomNumber, int numberOfOccupants, DateTime checkinDate, DateTime checkoutDate)
   {
     Reservation tempRes = new Reservation(reservationId, customerId, roomNumber, numberOfOccupants, checkinDate, checkoutDate);
-    reservations.Edit(tempRes);
+    resManager.Edit(tempRes);
   }
 
   //Rooms
 
   public Room[] findAvailableRooms(checkin, checkout, roomType)
   {
-    //TODO Not complete, will come back later
-    ArrayList<Reservation> listOfRes = reservations.GetAll();
-    ArrayList<Room> listOfRooms = rooms.GetAll();
+    ArrayList<Reservation> listOfRes = resManager.GetAll();
+    ArrayList<Room> listOfRooms = roomManager.GetAll();
 
-    ArrayList<Room> availRooms = null;
+    //new array for all reservations between checkin and checkout dates
+    ArrayList<Reservation> resBetweenDates = new ArrayList<Reservation>();
 
-    // 1. Call ReservationDatabaseManager.GetAll();
-		// 2. Call RoomDatabaseManager.GetAll();
-		// 3. Find taken rooms based on dates and types;
-		// 4. return list of all not taken rooms;
+    for (Reservation res : listOfRes)
+    {
+      if ((checkin.before(res.CheckinDate()) && checkout.before(res.CheckinDate()) || (checkin.after(res.CheckoutDate()) && checkout.after(res.CheckoutDate()))
+      {
+        resBetweenDates.add(res);
+      }
+    }
+
+    ArrayList<Room> availRooms = new ArrayList<Room>();
+
+    bool avail = true;
+
+    for (Room r : listOfRooms)
+    {
+      avail = true;
+      for (Reservation res : resBetweenDates)
+      {
+        if (r.RoomId() == res.RoomId())
+        {
+          avail = false;
+        }
+      }
+      if (avail == true)
+      {
+        availRooms.add(r);
+      }
+    }
+
+    return availRooms;
   }
 
   public int createRoom()
   {
     Room r = new Room();
     // 2. RoomType = type;
-    rooms.Create(r);
+    roomManager.Create(r);
   }
 
   public void editRoom(int roomNumber)
   {
     Room r = rooms.Get(roomNumber);
     // 2. RoomType = type;
-    rooms.Create(r);
+    roomManager.Create(r);
   }
 
   //Customers
+
   public int createCustomer(String lastName, String firstName, String address)
   {
     Customer c = new Customer();
     c.SetLastName(lastName);
     c.SetFirstName(firstName);
     c.SetStreetAddress(address);
-    customers.Create(c);
-    //return customerId
+    return customerManager.Create(c);
   }
 
   public void editCustomer(int customerID, String lastName, String firstName, String address)
   {
-    Customer c = customers.Get(customerID);
+    Customer c = customerManager.Get(customerID);
     c.SetLastName(lastName);
     c.SetFirstName(firstName);
     c.SetStreetAddress(address);
-    customers.Edit(c);
+    customerManager.Edit(c);
   }
 
 }
