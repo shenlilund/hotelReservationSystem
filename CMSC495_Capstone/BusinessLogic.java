@@ -101,21 +101,25 @@ public class BusinessLogic
 
   //Customers
 
-  public int createCustomer(String lastName, String firstName, String address)
+  public int createCustomer(String lastName, String firstName, String address, String state, String zip)
   {
     Customer c = new Customer();
     c.SetLastName(lastName);
     c.SetFirstName(firstName);
     c.SetStreetAddress(address);
+    c.SetState(state);
+    c.SetZipcode(zip);
     return customerManager.Create(c);
   }
 
-  public void editCustomer(int customerID, String lastName, String firstName, String address)
+  public void editCustomer(int customerID, String lastName, String firstName, String address, String state, String zip)
   {
     Customer c = customerManager.Get(customerID);
     c.SetLastName(lastName);
     c.SetFirstName(firstName);
     c.SetStreetAddress(address);
+    c.SetState(state);
+    c.SetZipcode(zip);
     customerManager.Edit(c);
   }
 

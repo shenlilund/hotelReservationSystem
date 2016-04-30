@@ -24,9 +24,15 @@ public class driver
       b.editReservation(3, 3, 5, 3, Date.valueOf("2016-7-10"), Date.valueOf("2016-7-13"));
 
       //creating a room
-      b.createRoom(RoomTypes.queen);
+      // b.createRoom(RoomTypes.queen);
 
       //editing a room
       // b.editRoom(6, RoomTypes.doublebed);
+
+      //creating a customer
+      // b.createCustomer("Shenli", "Lund", "123 Test Drive", "TX", "12345");
+
+      //editing a customer
+      b.editCustomer(4, "Shenli", "Lund", "123 Test Drive 2", "TX", "12345");
     }
 }
