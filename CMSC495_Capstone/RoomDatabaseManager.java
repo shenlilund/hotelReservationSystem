@@ -2,6 +2,10 @@
 // Daniel Entzian
 // April 19, 2016
 
+//Revisions
+// 4/19/2016	Dan Entzian		Initial creation
+// 4/30/2016	Dan Entzian		Fixed issue with GetAll() that was assigning double to all rooms
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
