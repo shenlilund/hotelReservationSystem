@@ -2,26 +2,14 @@
 // Shenli Lund
 // April 23, 2016
 
+import java.sql.Date;
+import java.util.ArrayList;
+
 //This class is used as a link between the UI and the rest of the project. To do anything to the databases, the UI will need to call methods in this class first.
 
 public class BusinessLogic
 {
   //class variables ------------------------------------------------------------
-
-  //TODO Don't think we need any of these variables actually
-  // private int customer; //TODO Why are these ints? Shouldn't they be objects? like private Customer customer;
-  // private int room;
-  // private int customerID;
-  // private int roomNumber;
-  // private int numberOfOccupants;
-  // private Date checkInDate;
-  // private Date checkOutDate;
-  // private int reservationID;
-  // private int roomNumber;
-  // private Type roomType;   //TODO we don't have a Type class?
-  // private String firstName; //TODO if we have a customer object, we could get the names from that
-  // private String lastName;
-  // private String address;
 
   ReservationDatabaseManager resManager;
   RoomDatabaseManager roomManager;
@@ -36,37 +24,21 @@ public class BusinessLogic
   }
 
   //getters and setters --------------------------------------------------------
-  public Date getCheckIn()
-  {
-    return checkInDate;
-  }
-  public void setCheckin(Date d)
-  {
-    checkInDate = d;
-  }
 
-  public Date getCheckOut()
-  {
-    return checkOutDate;
-  }
-  public void setCheckOut(Date d)
-  {
-      checkOutDate = d;
-  }
 
 
   //class methods --------------------------------------------------------------
 
   //Reservations
 
-  public Reservation createReservation(int customerId, int roomNumber, int numberOfOccupants, DateTime checkinDate, DateTime checkoutDate)
+  public void createReservation(int customerId, int roomNumber, int numberOfOccupants, Date checkinDate, Date checkoutDate)
   {
-    Reservation newRes = null;
+    Reservation newRes = new Reservation(0, customerId, roomNumber, numberOfOccupants, checkinDate, checkoutDate);
     resManager.Create(newRes);
   }
 
   //pass in all items, and it will replace the existing reservation with this new one
-  public void editReservation(int reservationId, int customerId, int roomNumber, int numberOfOccupants, DateTime checkinDate, DateTime checkoutDate)
+  public void editReservation(int reservationId, int customerId, int roomNumber, int numberOfOccupants, Date checkinDate, Date checkoutDate)
   {
     Reservation tempRes = new Reservation(reservationId, customerId, roomNumber, numberOfOccupants, checkinDate, checkoutDate);
     resManager.Edit(tempRes);
@@ -74,7 +46,7 @@ public class BusinessLogic
 
   //Rooms
 
-  public Room[] findAvailableRooms(checkin, checkout, roomType)
+  public ArrayList<Room> findAvailableRooms(Date checkin, Date checkout, RoomTypes roomType)
   {
     ArrayList<Reservation> listOfRes = resManager.GetAll();
     ArrayList<Room> listOfRooms = roomManager.GetAll();
@@ -84,7 +56,7 @@ public class BusinessLogic
 
     for (Reservation res : listOfRes)
     {
-      if ((checkin.before(res.CheckinDate()) && checkout.before(res.CheckinDate()) || (checkin.after(res.CheckoutDate()) && checkout.after(res.CheckoutDate()))
+      if (!((checkin.before(res.CheckinDate()) && checkout.before(res.CheckinDate())) || (checkin.after(res.CheckoutDate()) && checkout.after(res.CheckoutDate()))))
       {
         resBetweenDates.add(res);
       }
@@ -92,7 +64,7 @@ public class BusinessLogic
 
     ArrayList<Room> availRooms = new ArrayList<Room>();
 
-    bool avail = true;
+    boolean avail = true;
 
     for (Room r : listOfRooms)
     {
@@ -113,17 +85,17 @@ public class BusinessLogic
     return availRooms;
   }
 
-  public int createRoom()
+  public int createRoom(RoomTypes type)
   {
     Room r = new Room();
-    // 2. RoomType = type;
-    roomManager.Create(r);
+    r.SetRoomType(type);
+    return roomManager.Create(r);
   }
 
-  public void editRoom(int roomNumber)
+  public void editRoom(int roomNumber, RoomTypes type)
   {
-    Room r = rooms.Get(roomNumber);
-    // 2. RoomType = type;
+    Room r = roomManager.Get(roomNumber);
+    r.SetRoomType(type);
     roomManager.Create(r);
   }
 
