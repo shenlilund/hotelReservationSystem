@@ -80,7 +80,8 @@ public class RoomDatabaseManager
 				String[] lineParts = line.split(delimiter);
 				
 				RoomTypes roomType;
-				if(lineParts[1] == RoomTypes.queen.toString())
+
+				if(lineParts[1].equals(RoomTypes.queen.toString()))
 				{
 					roomType = RoomTypes.queen;
 				}

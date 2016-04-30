@@ -10,7 +10,7 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//testCustomerrsWrite();
-		testCustomersGetAll();
+		//testCustomersGetAll();
 		//testCreateCustomer();
 		//testGetCustomer();
 		//testEditCustomer();
@@ -22,6 +22,17 @@ public class Test {
 		//testResCancel();
 		
 		//testRoomCreate();
+		testRoomGetAll();
+	}
+	private static void testRoomGetAll()
+	{
+		RoomDatabaseManager manager = new RoomDatabaseManager();
+		ArrayList<Room> roomOutput = manager.GetAll();
+
+		for(Room r: roomOutput)
+		{
+			System.out.println(r);
+		}
 	}
 	
 	private static void testRoomCreate()
@@ -84,7 +95,7 @@ public class Test {
 	private static void testResGetAndEdit()
 	{
 		ReservationDatabaseManager manager = new ReservationDatabaseManager();
-		Reservation res = manager.Get(3);
+		Reservation res = manager.Get(2);
 		System.out.println(res);
 		
 		res.SetCheckinDate(Date.valueOf("2016-5-24"));
