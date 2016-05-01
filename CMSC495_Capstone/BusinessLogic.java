@@ -96,7 +96,7 @@ public class BusinessLogic
   {
     Room r = roomManager.Get(roomNumber);
     r.SetRoomType(type);
-    roomManager.Create(r);
+    roomManager.Edit(r);
   }
 
   //Customers
