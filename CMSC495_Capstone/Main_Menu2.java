@@ -92,57 +92,16 @@ public class Main_Menu2 {
 		showReservationMenu.setBounds(43, 140, 235, 29);
 		mainMenu.add(showReservationMenu);
 
-		JButton createReservationForm = new JButton("Create Reservation");
-		createReservationForm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				createReservationMenu.setVisible(true);
-				mainMenu.setVisible(false);
-			}
-		});
-		createReservationForm.setBounds(335, 140, 235, 29);
-		mainMenu.add(createReservationForm);
 
-		JButton editReservationForm = new JButton("Edit Reservation");
-		editReservationForm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				editReservationMenu.setVisible(true);
-				mainMenu.setVisible(false);
 
-			}
-		});
-		editReservationForm.setBounds(335, 186, 235, 29);
-		mainMenu.add(editReservationForm);
 
-		JButton showCustomerMenu = new JButton("Customer Menu");
-		showCustomerMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				customerMenu.setVisible(true);
-				mainMenu.setVisible(false);
-			}
-		});
-		showCustomerMenu.setBounds(43, 186, 235, 29);
-		mainMenu.add(showCustomerMenu);
 
-		JButton showRoomMenu = new JButton("Room Menu");
-		showRoomMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				roomMenu.setVisible(true);
-				mainMenu.setVisible(false);
 
-			}
-		});
-		showRoomMenu.setBounds(43, 231, 235, 29);
-		mainMenu.add(showRoomMenu);
 
-		JButton reservationCheckOutForm = new JButton("Reservation Check-out");
-		reservationCheckOutForm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				reservationCheckOutMenu.setVisible(true);
-				mainMenu.setVisible(false);
-			}
-		});
-		reservationCheckOutForm.setBounds(335, 231, 235, 29);
-		mainMenu.add(reservationCheckOutForm);
+
+
+
+
 
 		JButton exitProgram = new JButton("Close");
 		exitProgram.addActionListener(new ActionListener() {
@@ -158,6 +117,16 @@ public class Main_Menu2 {
 		frame.getContentPane().add(createReservationMenu, "name_1079664005828921");
 		createReservationMenu.setLayout(null);
 		createReservationMenu.setVisible(false);
+
+		JButton createReservationForm = new JButton("Create Reservation");
+		createReservationForm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createReservationMenu.setVisible(true);
+				mainMenu.setVisible(false);
+			}
+		});
+		createReservationForm.setBounds(335, 140, 235, 29);
+		mainMenu.add(createReservationForm);
 
 		JLabel lblNewLabel = new JLabel("New Reservation");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -225,6 +194,17 @@ public class Main_Menu2 {
 		editReservationMenu.setLayout(null);
 		editReservationMenu.setVisible(false);
 
+		JButton editReservationForm = new JButton("Edit Reservation");
+		editReservationForm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editReservationMenu.setVisible(true);
+				mainMenu.setVisible(false);
+
+			}
+		});
+		editReservationForm.setBounds(335, 186, 235, 29);
+		mainMenu.add(editReservationForm);
+
 		JLabel lblEditReservation = new JLabel("Edit Reservation");
 		lblEditReservation.setForeground(Color.WHITE);
 		lblEditReservation.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -290,6 +270,16 @@ public class Main_Menu2 {
 		frame.getContentPane().add(customerMenu, "name_1079664017197885");
 		customerMenu.setLayout(null);
 		customerMenu.setVisible(false);
+
+		JButton showCustomerMenu = new JButton("Customer Menu");
+		showCustomerMenu.setBounds(43, 186, 235, 29);
+		mainMenu.add(showCustomerMenu);
+		showCustomerMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				customerMenu.setVisible(true);
+				mainMenu.setVisible(false);
+			}
+		});
 
 		JLabel lblCustomerMenu = new JLabel("Customer Menu");
 		lblCustomerMenu.setForeground(Color.WHITE);
@@ -402,6 +392,17 @@ public class Main_Menu2 {
 		roomMenu.setLayout(null);
 		roomMenu.setVisible(false);
 
+		JButton showRoomMenu = new JButton("Room Menu");
+		showRoomMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				roomMenu.setVisible(true);
+				mainMenu.setVisible(false);
+
+			}
+		});
+		showRoomMenu.setBounds(43, 231, 235, 29);
+		mainMenu.add(showRoomMenu);
+
 		JLabel lblRoomMenu = new JLabel("Room Menu");
 		lblRoomMenu.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblRoomMenu.setForeground(Color.WHITE);
@@ -454,6 +455,16 @@ public class Main_Menu2 {
 		frame.getContentPane().add(reservationCheckoutMenu, "name_1079664031624391");
 		reservationCheckoutMenu.setLayout(null);
 		reservationCheckoutMenu.setVisible(false);
+
+		JButton reservationCheckOutForm = new JButton("Reservation Check-out");
+		reservationCheckOutForm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reservationCheckOutMenu.setVisible(true);
+				mainMenu.setVisible(false);
+			}
+		});
+		reservationCheckOutForm.setBounds(335, 231, 235, 29);
+		mainMenu.add(reservationCheckOutForm);
 
 		JLabel lblReservationCheckOut = new JLabel("Reservation Check Out");
 		lblReservationCheckOut.setForeground(Color.WHITE);
