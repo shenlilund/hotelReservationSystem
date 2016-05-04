@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 public class Main_Menu2 {
 
@@ -75,6 +77,7 @@ public class Main_Menu2 {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 
+		//Initialize Main Menu -----------------------------------------------------
 		final JPanel mainMenu = new JPanel();
 		mainMenu.setForeground(Color.WHITE);
 		mainMenu.setBackground(Color.DARK_GRAY);
@@ -93,16 +96,6 @@ public class Main_Menu2 {
 		mainMenu.add(showReservationMenu);
 
 
-
-
-
-
-
-
-
-
-
-
 		JButton exitProgram = new JButton("Close");
 		exitProgram.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -112,6 +105,7 @@ public class Main_Menu2 {
 		exitProgram.setBounds(435, 367, 235, 29);
 		mainMenu.add(exitProgram);
 
+		//Create Reservation Menu --------------------------------------------------
 		final JPanel createReservationMenu = new JPanel();
 		createReservationMenu.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(createReservationMenu, "name_1079664005828921");
@@ -188,6 +182,8 @@ public class Main_Menu2 {
 		newReservationCreateReservationButton.setBounds(134, 275, 189, 29);
 		createReservationMenu.add(newReservationCreateReservationButton);
 
+
+		//Edit Reservation Menu-----------------------------------------------------
 		final JPanel editReservationMenu = new JPanel();
 		editReservationMenu.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(editReservationMenu, "name_1079664011450164");
@@ -265,6 +261,7 @@ public class Main_Menu2 {
 		btnEditReservation.setBounds(143, 285, 180, 29);
 		editReservationMenu.add(btnEditReservation);
 
+		//Customer Menu ------------------------------------------------------------
 		final JPanel customerMenu = new JPanel();
 		customerMenu.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(customerMenu, "name_1079664017197885");
@@ -312,6 +309,40 @@ public class Main_Menu2 {
 		JButton btnFindCustomer = new JButton("Find Customer");
 		btnFindCustomer.setBounds(177, 90, 186, 29);
 		customerMenu.add(btnFindCustomer);
+
+		btnFindCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String cLastName = customerMenuLastName.getText();
+				if (cLastName.equals("")) //textfield is empty
+				{
+					JOptionPane.showMessageDialog(null, "Please input the customer's last name");
+				}
+				else //Something was found in the textfield
+				{
+					ArrayList<Customer> foundCustomers = bLogic.findCustomer(cLastName);
+					if (foundCustomers.isEmpty())
+					{
+						JOptionPane.showMessageDialog(null, "No customers found with that name");
+					}
+					else
+					{
+						String str = "";
+						for (Customer c : foundCustomers)
+						{
+							System.out.println(c.CustomerId());
+							str += "Customer ID: " + c.CustomerId() +
+								"\nName: " + c.LastName() + ", " + c.FirstName() +
+								"\nAddress: " + c.StreetAddress() +
+								"\nState: " + c.State() +
+								"\nZip: " + c.Zipcode() +
+								"\n\n\n";
+						}
+						JOptionPane.showMessageDialog(null, str);
+					}
+				}
+				customerMenuLastName.setText("");
+			}
+		});
 
 		JLabel lblFirstName = new JLabel("First Name");
 		lblFirstName.setForeground(Color.WHITE);
@@ -386,6 +417,8 @@ public class Main_Menu2 {
 		btnCustomerMenuCreateCustomer.setBounds(239, 320, 167, 29);
 		customerMenu.add(btnCustomerMenuCreateCustomer);
 
+
+		//Room Menu ----------------------------------------------------------------
 		final JPanel roomMenu = new JPanel();
 		roomMenu.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(roomMenu, "name_1079664024329636");
@@ -450,6 +483,8 @@ public class Main_Menu2 {
 		btnEditRoom.setBounds(462, 161, 146, 29);
 		roomMenu.add(btnEditRoom);
 
+
+		//Reservation Check-out Menu -----------------------------------------------
 		final JPanel reservationCheckoutMenu = new JPanel();
 		reservationCheckoutMenu.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(reservationCheckoutMenu, "name_1079664031624391");

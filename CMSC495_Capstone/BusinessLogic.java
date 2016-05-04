@@ -123,4 +123,9 @@ public class BusinessLogic
     customerManager.Edit(c);
   }
 
+  public ArrayList<Customer> findCustomer(String searchString)
+  {
+    return customerManager.Find(searchString);
+  }
+
 }
