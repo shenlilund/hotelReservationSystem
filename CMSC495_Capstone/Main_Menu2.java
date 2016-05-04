@@ -37,9 +37,10 @@ public class Main_Menu2 {
 	private JTextField customerMenuFirstName;
 	private JTextField textField;
 	private JTextField customerMenuStreetAddress;
-	private JTextField customerMenuCity;
-	private JTextField customerMenuPhoneNumber;
-	private JTextField customerMenuEmail;
+	// private JTextField customerMenuCity;
+	// private JTextField customerMenuPhoneNumber;
+	private JTextField customerMenuState;
+	private JTextField customerMenuZip;
 	private JTextField roomMenuRoomNumber;
 	private BusinessLogic bLogic;
 
@@ -351,7 +352,7 @@ public class Main_Menu2 {
 
 		JLabel lblLastName = new JLabel("Last Name");
 		lblLastName.setForeground(Color.WHITE);
-		lblLastName.setBounds(274, 166, 89, 20);
+		lblLastName.setBounds(310, 166, 89, 20);
 		customerMenu.add(lblLastName);
 
 		JLabel lblStreetAddress = new JLabel("Street Address");
@@ -359,33 +360,33 @@ public class Main_Menu2 {
 		lblStreetAddress.setBounds(15, 207, 103, 20);
 		customerMenu.add(lblStreetAddress);
 
-		JLabel lblCity = new JLabel("City");
-		lblCity.setForeground(Color.WHITE);
-		lblCity.setBounds(294, 207, 69, 20);
-		customerMenu.add(lblCity);
+		// JLabel lblCity = new JLabel("City");
+		// lblCity.setForeground(Color.WHITE);
+		// lblCity.setBounds(294, 207, 69, 20);
+		// customerMenu.add(lblCity);
 
 		JLabel lblState = new JLabel("State");
 		lblState.setForeground(Color.WHITE);
-		lblState.setBounds(503, 207, 69, 20);
+		lblState.setBounds(310, 207, 69, 20);
 		customerMenu.add(lblState);
 
-		JLabel lblPhoneNumber = new JLabel("Phone Number");
-		lblPhoneNumber.setForeground(Color.WHITE);
-		lblPhoneNumber.setBounds(15, 266, 130, 20);
-		customerMenu.add(lblPhoneNumber);
+		// JLabel lblPhoneNumber = new JLabel("Phone Number");
+		// lblPhoneNumber.setForeground(Color.WHITE);
+		// lblPhoneNumber.setBounds(15, 266, 130, 20);
+		// customerMenu.add(lblPhoneNumber);
 
-		JLabel lblEmail = new JLabel("E-Mail");
-		lblEmail.setForeground(Color.WHITE);
-		lblEmail.setBounds(294, 266, 69, 20);
-		customerMenu.add(lblEmail);
+		JLabel lblZip = new JLabel("Zip Code");
+		lblZip.setForeground(Color.WHITE);
+		lblZip.setBounds(15, 248, 69, 20);
+		customerMenu.add(lblZip);
 
 		customerMenuFirstName = new JTextField();
-		customerMenuFirstName.setBounds(107, 163, 146, 26);
+		customerMenuFirstName.setBounds(133, 163, 146, 26);
 		customerMenu.add(customerMenuFirstName);
 		customerMenuFirstName.setColumns(10);
 
 		textField = new JTextField();
-		textField.setBounds(359, 163, 146, 26);
+		textField.setBounds(400, 163, 146, 26);
 		customerMenu.add(textField);
 		textField.setColumns(10);
 
@@ -394,28 +395,51 @@ public class Main_Menu2 {
 		customerMenu.add(customerMenuStreetAddress);
 		customerMenuStreetAddress.setColumns(10);
 
-		customerMenuCity = new JTextField();
-		customerMenuCity.setBounds(327, 204, 146, 26);
-		customerMenu.add(customerMenuCity);
-		customerMenuCity.setColumns(10);
+		// customerMenuCity = new JTextField();
+		// customerMenuCity.setBounds(327, 204, 146, 26);
+		// customerMenu.add(customerMenuCity);
+		// customerMenuCity.setColumns(10);
 
-		JComboBox customerMenuState = new JComboBox();
-		customerMenuState.setBounds(554, 204, 36, 26);
+		// JComboBox customerMenuState = new JComboBox();
+		// customerMenuState.setBounds(554, 204, 36, 26);
+		// customerMenu.add(customerMenuState);
+		JTextField customerMenuState = new JTextField();
+		customerMenuState.setBounds(400, 204, 36, 26);
 		customerMenu.add(customerMenuState);
+		customerMenuState.setColumns(10);
 
-		customerMenuPhoneNumber = new JTextField();
-		customerMenuPhoneNumber.setBounds(133, 263, 146, 26);
-		customerMenu.add(customerMenuPhoneNumber);
-		customerMenuPhoneNumber.setColumns(10);
+		// customerMenuPhoneNumber = new JTextField();
+		// customerMenuPhoneNumber.setBounds(133, 263, 146, 26);
+		// customerMenu.add(customerMenuPhoneNumber);
+		// customerMenuPhoneNumber.setColumns(10);
 
-		customerMenuEmail = new JTextField();
-		customerMenuEmail.setBounds(359, 263, 146, 26);
-		customerMenu.add(customerMenuEmail);
-		customerMenuEmail.setColumns(10);
+		customerMenuZip = new JTextField();
+		customerMenuZip.setBounds(133, 248, 146, 26);
+		customerMenu.add(customerMenuZip);
+		customerMenuZip.setColumns(10);
 
 		JButton btnCustomerMenuCreateCustomer = new JButton("Create Customer");
 		btnCustomerMenuCreateCustomer.setBounds(239, 320, 167, 29);
 		customerMenu.add(btnCustomerMenuCreateCustomer);
+
+		btnCustomerMenuCreateCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int newCustomerId = bLogic.createCustomer(
+					textField.getText(),
+					customerMenuFirstName.getText(),
+					customerMenuStreetAddress.getText(),
+					customerMenuState.getText(),
+					customerMenuZip.getText()
+				);
+
+				JOptionPane.showMessageDialog(null, "New customer created with ID: " + newCustomerId);
+				textField.setText("");
+				customerMenuFirstName.setText("");
+				customerMenuStreetAddress.setText("");
+				customerMenuState.setText("");
+				customerMenuZip.setText("");
+			}
+		});
 
 
 		//Room Menu ----------------------------------------------------------------
