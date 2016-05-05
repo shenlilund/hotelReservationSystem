@@ -51,6 +51,8 @@ public class GUI {
 	private JFormattedTextField findRoomCheckIn;
 	private JFormattedTextField findRoomCheckOut;
 	private JTextField newReservationRoomIDField;
+	private JTextField editReservationRoomIDField;
+	private JTextField editReservationCustomerIDField;
 
 	/**
 	 * Launch the application.
@@ -292,7 +294,27 @@ public class GUI {
 		label_4.setBounds(15, 211, 145, 20);
 		editReservationMenu.add(label_4);
 
-		JComboBox editOccupants = new JComboBox();
+		JLabel lblEditRoomId = new JLabel("Room Id");
+		lblEditRoomId.setForeground(Color.WHITE);
+		lblEditRoomId.setBounds(360, 96, 114, 27);
+		editReservationMenu.add(lblEditRoomId);
+
+		editReservationRoomIDField = new JTextField();
+		editReservationRoomIDField.setBounds(450, 96, 146, 26);
+		editReservationMenu.add(editReservationRoomIDField);
+		editReservationRoomIDField.setColumns(10);
+
+		JLabel lblEditCustomerId = new JLabel("Customer Id");
+		lblEditCustomerId.setForeground(Color.WHITE);
+		lblEditCustomerId.setBounds(360, 132, 114, 27);
+		editReservationMenu.add(lblEditCustomerId);
+
+		editReservationCustomerIDField = new JTextField();
+		editReservationCustomerIDField.setBounds(450, 132, 146, 26);
+		editReservationMenu.add(editReservationCustomerIDField);
+		editReservationCustomerIDField.setColumns(10);
+
+		JTextField editOccupants = new JTextField();
 		editOccupants.setBounds(208, 208, 36, 26);
 		editReservationMenu.add(editOccupants);
 
@@ -322,6 +344,49 @@ public class GUI {
 		editReservationMenu.add(editBack);
 
 		JButton btnEditReservation = new JButton("Edit Reservation");
+		btnEditReservation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				//check that reservation id, roomId, customerId, and occupants are numbers
+				try
+				{
+					int resNum = Integer.parseInt(editReservationID.getText());
+					int theRoomNum = Integer.parseInt(editReservationRoomIDField.getText());
+					int customerNum = Integer.parseInt(editReservationCustomerIDField.getText());
+					int occupantsNum = Integer.parseInt(editOccupants.getText());
+
+					String checkInStr = editCheckInDate.getText();
+					String checkOutStr = editCheckOutDate.getText();
+
+					//check that date is in correct format
+					if ((checkInStr.equals("")) || (checkOutStr.equals(""))) //textfield is empty
+					{
+						JOptionPane.showMessageDialog(null, "Please input date using yyyy-MM-dd");
+					}
+					else
+					{
+						Date checkInD = Date.valueOf(checkInStr);
+						Date checkOutD = Date.valueOf(checkOutStr);
+
+						bLogic.editReservation(resNum, customerNum, theRoomNum, occupantsNum, checkInD, checkOutD);
+						JOptionPane.showMessageDialog(null, "Reservation created successfully");
+
+						//make all fields blank
+						editReservationID.setText("");
+						editReservationRoomIDField.setText("");
+						editReservationCustomerIDField.setText("");
+						editOccupants.setText("");
+						editCheckInDate.setText("");
+						editCheckOutDate.setText("");
+					}
+				}
+				catch(NumberFormatException ex)
+				{
+					JOptionPane.showMessageDialog(null, "Reservation Id, Customer Id, Room Id, and Number of occupants must be numbers");
+				}
+
+			}
+		});
 		btnEditReservation.setBounds(143, 285, 180, 29);
 		editReservationMenu.add(btnEditReservation);
 
