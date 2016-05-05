@@ -566,33 +566,84 @@ public class GUI {
 			}
 		});
 
-		JLabel lblRoomNumber = new JLabel("Room Number");
-		lblRoomNumber.setForeground(Color.WHITE);
-		lblRoomNumber.setBounds(351, 86, 104, 20);
-		roomMenu.add(lblRoomNumber);
+		// JLabel lblRoomNumber = new JLabel("Room Number");
+		// lblRoomNumber.setForeground(Color.WHITE);
+		// lblRoomNumber.setBounds(351, 86, 104, 20);
+		// roomMenu.add(lblRoomNumber);
 
 		JLabel lblRoomType = new JLabel("Room Type");
 		lblRoomType.setForeground(Color.WHITE);
-		lblRoomType.setBounds(351, 122, 104, 20);
+		lblRoomType.setBounds(365, 122, 104, 20);
 		roomMenu.add(lblRoomType);
 
+		// roomMenuRoomNumber = new JTextField();
+		// roomMenuRoomNumber.setBounds(462, 83, 146, 26);
+		// roomMenu.add(roomMenuRoomNumber);
+		// roomMenuRoomNumber.setColumns(10);
+
+		// JComboBox roomMenuRoomType = new JComboBox();
+		JComboBox<String> roomMenuRoomType = new JComboBox<>(typeStr);
+		roomMenuRoomType.setBounds(462, 119, 110, 26);
+		roomMenu.add(roomMenuRoomType);
+
+		JButton btnCreateRoom = new JButton("Create Room");
+		btnCreateRoom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				RoomTypes r = RoomTypes.doublebed;
+				String theType = roomMenuRoomType.getSelectedItem().toString();
+				if (theType.equals("Queen"))
+				{
+					r = RoomTypes.queen;
+				}
+				bLogic.createRoom(r);
+			}
+		});
+		btnCreateRoom.setBounds(462, 161, 146, 29);
+		roomMenu.add(btnCreateRoom);
+
 		roomMenuRoomNumber = new JTextField();
-		roomMenuRoomNumber.setBounds(462, 83, 146, 26);
+		roomMenuRoomNumber.setBounds(462, 230, 146, 26);
 		roomMenu.add(roomMenuRoomNumber);
 		roomMenuRoomNumber.setColumns(10);
 
-		JComboBox roomMenuRoomType = new JComboBox();
-		roomMenuRoomType.setBounds(524, 119, 36, 26);
-		roomMenu.add(roomMenuRoomType);
+		JComboBox<String> roomMenuRoomTypeEdit = new JComboBox<>(typeStr);
+		roomMenuRoomTypeEdit.setBounds(462, 260, 110, 26);
+		roomMenu.add(roomMenuRoomTypeEdit);
 
-		JButton btnEditRoom = new JButton("Create Room");
-		btnEditRoom.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton btnEditRoom = new JButton("Edit Room");
+		btnEditRoom.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				int theRoomNum = 0;
+				try
+				{
+					theRoomNum = Integer.parseInt(roomMenuRoomNumber.getText());
+
+					RoomTypes r = RoomTypes.doublebed;
+					String theType = roomMenuRoomTypeEdit.getSelectedItem().toString();
+					if (theType.equals("Queen"))
+					{
+						r = RoomTypes.queen;
+					}
+					if (bLogic.editRoom(theRoomNum, r))
+					{
+						JOptionPane.showMessageDialog(null, "Room edited successfully");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Room does not exist");
+					}
+				}
+				catch(NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog(null, "Please enter a number");
+				}
 			}
 		});
-		btnEditRoom.setBounds(462, 161, 146, 29);
+		btnEditRoom.setBounds(462, 290, 146, 29);
 		roomMenu.add(btnEditRoom);
-
 
 		//Reservation Check-out Menu -----------------------------------------------
 		final JPanel reservationCheckoutMenu = new JPanel();
