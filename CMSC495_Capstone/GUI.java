@@ -26,8 +26,8 @@ public class GUI {
 
 	private JFrame frame;
 	private JTextField newReservationCustomerIDField;
-	private JTextField newReservationCheckInDateField;
-	private JTextField newReservationCheckOutDateField;
+	private JFormattedTextField newReservationCheckInDateField;
+	private JFormattedTextField newReservationCheckOutDateField;
 	private JTextField editReservationID;
 	private JTextField editCheckInDate;
 	private JTextField editCheckOutDate;
@@ -50,6 +50,7 @@ public class GUI {
 	private BusinessLogic bLogic;
 	private JFormattedTextField findRoomCheckIn;
 	private JFormattedTextField findRoomCheckOut;
+	private JTextField newReservationRoomIDField;
 
 	/**
 	 * Launch the application.
@@ -84,6 +85,8 @@ public class GUI {
 		frame.setBounds(100, 100, 707, 468);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
+
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 		//Initialize Main Menu -----------------------------------------------------
 		final JPanel mainMenu = new JPanel();
@@ -142,6 +145,17 @@ public class GUI {
 		lblCustomerId.setBounds(15, 96, 114, 27);
 		createReservationMenu.add(lblCustomerId);
 
+		JLabel lblRoomId = new JLabel("Room Id");
+		lblRoomId.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblRoomId.setForeground(Color.WHITE);
+		lblRoomId.setBounds(360, 96, 114, 27);
+		createReservationMenu.add(lblRoomId);
+
+		newReservationRoomIDField = new JTextField();
+		newReservationRoomIDField.setBounds(450, 96, 146, 26);
+		createReservationMenu.add(newReservationRoomIDField);
+		newReservationRoomIDField.setColumns(10);
+
 		JLabel lblCheckinDate = new JLabel("Check-in Date");
 		lblCheckinDate.setForeground(Color.WHITE);
 		lblCheckinDate.setBounds(15, 139, 98, 20);
@@ -162,18 +176,19 @@ public class GUI {
 		createReservationMenu.add(newReservationCustomerIDField);
 		newReservationCustomerIDField.setColumns(10);
 
-		newReservationCheckInDateField = new JTextField();
+
+		newReservationCheckInDateField = new JFormattedTextField(df);
 		newReservationCheckInDateField.setBounds(149, 136, 146, 26);
 		createReservationMenu.add(newReservationCheckInDateField);
 		newReservationCheckInDateField.setColumns(10);
 
-		newReservationCheckOutDateField = new JTextField();
+		newReservationCheckOutDateField = new JFormattedTextField(df);
 		newReservationCheckOutDateField.setBounds(149, 172, 146, 26);
 		createReservationMenu.add(newReservationCheckOutDateField);
 		newReservationCheckOutDateField.setColumns(10);
 
-		JComboBox newReservationOccupants = new JComboBox();
-		newReservationOccupants.setBounds(205, 208, 36, 26);
+		JTextField newReservationOccupants = new JTextField();
+		newReservationOccupants.setBounds(205, 208, 50, 26);
 		createReservationMenu.add(newReservationOccupants);
 
 		JButton reservationFormBack = new JButton("Back");
@@ -187,6 +202,47 @@ public class GUI {
 		createReservationMenu.add(reservationFormBack);
 
 		JButton newReservationCreateReservationButton = new JButton("Create Reservation");
+		newReservationCreateReservationButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				//check that roomId, customerId, and occupants are numbers
+				try
+				{
+					int theRoomNum = Integer.parseInt(newReservationRoomIDField.getText());
+					int customerNum = Integer.parseInt(newReservationCustomerIDField.getText());
+					int occupantsNum = Integer.parseInt(newReservationOccupants.getText());
+
+					String checkInStr = newReservationCheckInDateField.getText();
+					String checkOutStr = newReservationCheckOutDateField.getText();
+
+					//check that date is in correct format
+					if ((checkInStr.equals("")) || (checkOutStr.equals(""))) //textfield is empty
+					{
+						JOptionPane.showMessageDialog(null, "Please input date using yyyy-MM-dd");
+					}
+					else
+					{
+						Date checkInD = Date.valueOf(checkInStr);
+						Date checkOutD = Date.valueOf(checkOutStr);
+
+						bLogic.createReservation(customerNum, theRoomNum, occupantsNum, checkInD, checkOutD);
+						JOptionPane.showMessageDialog(null, "Reservation created successfully");
+
+						//make all fields blank
+						newReservationRoomIDField.setText("");
+						newReservationCustomerIDField.setText("");
+						newReservationOccupants.setText("");
+						newReservationCheckInDateField.setText("");
+						newReservationCheckOutDateField.setText("");
+					}
+				}
+				catch(NumberFormatException ex)
+				{
+					JOptionPane.showMessageDialog(null, "Customer Id, Room Id, and Number of occupants must be numbers");
+				}
+
+			}
+		});
 		newReservationCreateReservationButton.setBounds(134, 275, 189, 29);
 		createReservationMenu.add(newReservationCreateReservationButton);
 
@@ -504,7 +560,7 @@ public class GUI {
 		roomMenu.add(findRoomofType);
 		// findRoomofType.setColumns(10);
 
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
 		findRoomCheckIn = new JFormattedTextField(df);
 		findRoomCheckIn.setBounds(154, 136, 146, 26);
 		roomMenu.add(findRoomCheckIn);
@@ -638,7 +694,7 @@ public class GUI {
 				}
 				catch(NumberFormatException e)
 				{
-					JOptionPane.showMessageDialog(null, "Please enter a number");
+					JOptionPane.showMessageDialog(null, "Room Number must be a number");
 				}
 			}
 		});
@@ -655,7 +711,7 @@ public class GUI {
 		JButton reservationCheckOutForm = new JButton("Reservation Check-out");
 		reservationCheckOutForm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				reservationCheckOutMenu.setVisible(true);
+				reservationCheckoutMenu.setVisible(true);
 				mainMenu.setVisible(false);
 			}
 		});
@@ -687,7 +743,7 @@ public class GUI {
 		reservationCheckOutBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainMenu.setVisible(true);
-				reservationCheckOutMenu.setVisible(false);
+				reservationCheckoutMenu.setVisible(false);
 			}
 		});
 		reservationCheckOutBack.setBounds(555, 367, 115, 29);
