@@ -12,10 +12,15 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.awt.event.*;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import java.sql.Date;;
 
 public class GUI {
 
@@ -43,6 +48,8 @@ public class GUI {
 	private JTextField customerMenuZip;
 	private JTextField roomMenuRoomNumber;
 	private BusinessLogic bLogic;
+	private JFormattedTextField findRoomCheckIn;
+	private JFormattedTextField findRoomCheckOut;
 
 	/**
 	 * Launch the application.
@@ -330,7 +337,7 @@ public class GUI {
 						String str = "";
 						for (Customer c : foundCustomers)
 						{
-							System.out.println(c.CustomerId());
+							// System.out.println(c.CustomerId());
 							str += "Customer ID: " + c.CustomerId() +
 								"\nName: " + c.LastName() + ", " + c.FirstName() +
 								"\nAddress: " + c.StreetAddress() +
@@ -476,9 +483,88 @@ public class GUI {
 		btnRoomMenuBack.setBounds(555, 367, 115, 29);
 		roomMenu.add(btnRoomMenuBack);
 
+		JLabel lblFindRoomOfType = new JLabel("Room Type");
+		lblFindRoomOfType.setForeground(Color.WHITE);
+		lblFindRoomOfType.setBounds(15, 100, 98, 20);
+		roomMenu.add(lblFindRoomOfType);
+
+		JLabel lblFindRoomCheckIn = new JLabel("Check-in Date");
+		lblFindRoomCheckIn.setForeground(Color.WHITE);
+		lblFindRoomCheckIn.setBounds(15, 139, 98, 20);
+		roomMenu.add(lblFindRoomCheckIn);
+
+		JLabel lblFindRoomCheckOut = new JLabel("Check-out Date");
+		lblFindRoomCheckOut.setForeground(Color.WHITE);
+		lblFindRoomCheckOut.setBounds(15, 175, 119, 20);
+		roomMenu.add(lblFindRoomCheckOut);
+
+		String[] typeStr = { "Double", "Queen"};
+		JComboBox<String> findRoomofType = new JComboBox<>(typeStr);
+		findRoomofType.setBounds(154, 100, 146, 26);
+		roomMenu.add(findRoomofType);
+		// findRoomofType.setColumns(10);
+
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		findRoomCheckIn = new JFormattedTextField(df);
+		findRoomCheckIn.setBounds(154, 136, 146, 26);
+		roomMenu.add(findRoomCheckIn);
+		findRoomCheckIn.setColumns(10);
+
+		findRoomCheckOut = new JFormattedTextField(df);
+		findRoomCheckOut.setBounds(154, 172, 146, 26);
+		roomMenu.add(findRoomCheckOut);
+		findRoomCheckOut.setColumns(10);
+
 		JButton btnFindAvailableRooms = new JButton("Find Available Rooms");
 		btnFindAvailableRooms.setBounds(55, 250, 185, 29);
 		roomMenu.add(btnFindAvailableRooms);
+
+		btnFindAvailableRooms.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String checkInStr = findRoomCheckIn.getText();
+				String checkOutStr = findRoomCheckOut.getText();
+				if ((checkInStr.equals("")) || (checkOutStr.equals(""))) //textfield is empty
+				{
+					JOptionPane.showMessageDialog(null, "Please input date using yyyy-MM-dd");
+				}
+				else
+				{
+					RoomTypes r = RoomTypes.doublebed;
+					String theType = findRoomofType.getSelectedItem().toString();
+					if (theType.equals("Double"))
+					{
+						r = RoomTypes.doublebed;
+					}
+					else if (theType.equals("Queen"))
+					{
+						r = RoomTypes.queen;
+					}
+
+					Date checkInD = Date.valueOf(checkInStr);
+					Date checkOutD = Date.valueOf(checkOutStr);
+
+					ArrayList<Room> availRooms = bLogic.findAvailableRooms(checkInD, checkOutD, r);
+					if (availRooms.isEmpty())
+					{
+						JOptionPane.showMessageDialog(null, "No rooms available");
+					}
+					else
+					{
+						String str = "";
+						for(Room aRoom : availRooms)
+						{
+							RoomTypes rType = aRoom.RoomType();
+							str += "Room ID: " + aRoom.RoomId() +
+								"\nRoom Type: " + rType +
+								"\n\n\n";
+						}
+						JOptionPane.showMessageDialog(null, str);
+					}
+				}
+			}
+		});
 
 		JLabel lblRoomNumber = new JLabel("Room Number");
 		lblRoomNumber.setForeground(Color.WHITE);
