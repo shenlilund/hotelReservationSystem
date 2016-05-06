@@ -101,7 +101,7 @@ public class GUI {
 		JLabel lblHotelReservationSystem = new JLabel("Hotel Reservation System");
 		lblHotelReservationSystem.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblHotelReservationSystem.setForeground(Color.WHITE);
-		lblHotelReservationSystem.setBounds(291, 62, 339, 35);
+		lblHotelReservationSystem.setBounds(150, 62, 500, 35);
 		mainMenu.add(lblHotelReservationSystem);
 
 		// JButton showReservationMenu = new JButton("Show Reservation Menu");
@@ -138,7 +138,7 @@ public class GUI {
 		JLabel lblNewLabel = new JLabel("New Reservation");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(481, 16, 189, 40);
+		lblNewLabel.setBounds(370, 29, 234, 55);
 		createReservationMenu.add(lblNewLabel);
 
 		JLabel lblCustomerId = new JLabel("Customer Id");
@@ -270,7 +270,7 @@ public class GUI {
 		JLabel lblEditReservation = new JLabel("Edit Reservation");
 		lblEditReservation.setForeground(Color.WHITE);
 		lblEditReservation.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblEditReservation.setBounds(481, 16, 189, 40);
+		lblEditReservation.setBounds(377, 27, 208, 49);
 		editReservationMenu.add(lblEditReservation);
 
 		JLabel editReservationIDLabel = new JLabel("Reservation Id");
@@ -410,7 +410,7 @@ public class GUI {
 		JLabel lblCustomerMenu = new JLabel("Customer Menu");
 		lblCustomerMenu.setForeground(Color.WHITE);
 		lblCustomerMenu.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblCustomerMenu.setBounds(503, 16, 167, 20);
+		lblCustomerMenu.setBounds(396, 39, 225, 35);
 		customerMenu.add(lblCustomerMenu);
 
 		JButton btnCustomerMenuBack = new JButton("Back");
@@ -591,7 +591,7 @@ public class GUI {
 		JLabel lblRoomMenu = new JLabel("Room Menu");
 		lblRoomMenu.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblRoomMenu.setForeground(Color.WHITE);
-		lblRoomMenu.setBounds(543, 16, 127, 20);
+		lblRoomMenu.setBounds(421, 16, 187, 44);
 		roomMenu.add(lblRoomMenu);
 
 		JButton btnRoomMenuBack = new JButton("Back");
