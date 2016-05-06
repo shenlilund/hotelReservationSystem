@@ -104,9 +104,9 @@ public class GUI {
 		lblHotelReservationSystem.setBounds(291, 62, 339, 35);
 		mainMenu.add(lblHotelReservationSystem);
 
-		JButton showReservationMenu = new JButton("Show Reservation Menu");
-		showReservationMenu.setBounds(43, 140, 235, 29);
-		mainMenu.add(showReservationMenu);
+		// JButton showReservationMenu = new JButton("Show Reservation Menu");
+		// showReservationMenu.setBounds(43, 140, 235, 29);
+		// mainMenu.add(showReservationMenu);
 
 
 		JButton exitProgram = new JButton("Close");
@@ -132,7 +132,7 @@ public class GUI {
 				mainMenu.setVisible(false);
 			}
 		});
-		createReservationForm.setBounds(335, 140, 235, 29);
+		createReservationForm.setBounds(335, 186, 235, 29);
 		mainMenu.add(createReservationForm);
 
 		JLabel lblNewLabel = new JLabel("New Reservation");
@@ -264,7 +264,7 @@ public class GUI {
 
 			}
 		});
-		editReservationForm.setBounds(335, 186, 235, 29);
+		editReservationForm.setBounds(335, 231, 235, 29);
 		mainMenu.add(editReservationForm);
 
 		JLabel lblEditReservation = new JLabel("Edit Reservation");
@@ -767,55 +767,55 @@ public class GUI {
 		roomMenu.add(btnEditRoom);
 
 		//Reservation Check-out Menu -----------------------------------------------
-		final JPanel reservationCheckoutMenu = new JPanel();
-		reservationCheckoutMenu.setBackground(Color.DARK_GRAY);
-		frame.getContentPane().add(reservationCheckoutMenu, "name_1079664031624391");
-		reservationCheckoutMenu.setLayout(null);
-		reservationCheckoutMenu.setVisible(false);
-
-		JButton reservationCheckOutForm = new JButton("Reservation Check-out");
-		reservationCheckOutForm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				reservationCheckoutMenu.setVisible(true);
-				mainMenu.setVisible(false);
-			}
-		});
-		reservationCheckOutForm.setBounds(335, 231, 235, 29);
-		mainMenu.add(reservationCheckOutForm);
-
-		JLabel lblReservationCheckOut = new JLabel("Reservation Check Out");
-		lblReservationCheckOut.setForeground(Color.WHITE);
-		lblReservationCheckOut.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblReservationCheckOut.setBounds(428, 16, 242, 20);
-		reservationCheckoutMenu.add(lblReservationCheckOut);
-
-		JLabel lblReservationId = new JLabel("Reservation ID");
-		lblReservationId.setForeground(Color.WHITE);
-		lblReservationId.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblReservationId.setBounds(15, 83, 132, 20);
-		reservationCheckoutMenu.add(lblReservationId);
-
-		checkOutReservationID = new JTextField();
-		checkOutReservationID.setBounds(162, 82, 318, 26);
-		reservationCheckoutMenu.add(checkOutReservationID);
-		checkOutReservationID.setColumns(10);
-
-		JButton btnFindId = new JButton("Find ID");
-		btnFindId.setBounds(162, 124, 146, 29);
-		reservationCheckoutMenu.add(btnFindId);
-
-		JButton reservationCheckOutBack = new JButton("Back");
-		reservationCheckOutBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				mainMenu.setVisible(true);
-				reservationCheckoutMenu.setVisible(false);
-			}
-		});
-		reservationCheckOutBack.setBounds(555, 367, 115, 29);
-		reservationCheckoutMenu.add(reservationCheckOutBack);
-
-		JButton reservationCheckOut = new JButton("Check Out");
-		reservationCheckOut.setBounds(334, 124, 146, 29);
-		reservationCheckoutMenu.add(reservationCheckOut);
+		// final JPanel reservationCheckoutMenu = new JPanel();
+		// reservationCheckoutMenu.setBackground(Color.DARK_GRAY);
+		// frame.getContentPane().add(reservationCheckoutMenu, "name_1079664031624391");
+		// reservationCheckoutMenu.setLayout(null);
+		// reservationCheckoutMenu.setVisible(false);
+		//
+		// JButton reservationCheckOutForm = new JButton("Reservation Check-out");
+		// reservationCheckOutForm.addActionListener(new ActionListener() {
+		// 	public void actionPerformed(ActionEvent e) {
+		// 		reservationCheckoutMenu.setVisible(true);
+		// 		mainMenu.setVisible(false);
+		// 	}
+		// });
+		// reservationCheckOutForm.setBounds(335, 231, 235, 29);
+		// mainMenu.add(reservationCheckOutForm);
+		//
+		// JLabel lblReservationCheckOut = new JLabel("Reservation Check Out");
+		// lblReservationCheckOut.setForeground(Color.WHITE);
+		// lblReservationCheckOut.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		// lblReservationCheckOut.setBounds(428, 16, 242, 20);
+		// reservationCheckoutMenu.add(lblReservationCheckOut);
+		//
+		// JLabel lblReservationId = new JLabel("Reservation ID");
+		// lblReservationId.setForeground(Color.WHITE);
+		// lblReservationId.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		// lblReservationId.setBounds(15, 83, 132, 20);
+		// reservationCheckoutMenu.add(lblReservationId);
+		//
+		// checkOutReservationID = new JTextField();
+		// checkOutReservationID.setBounds(162, 82, 318, 26);
+		// reservationCheckoutMenu.add(checkOutReservationID);
+		// checkOutReservationID.setColumns(10);
+		//
+		// JButton btnFindId = new JButton("Find ID");
+		// btnFindId.setBounds(162, 124, 146, 29);
+		// reservationCheckoutMenu.add(btnFindId);
+		//
+		// JButton reservationCheckOutBack = new JButton("Back");
+		// reservationCheckOutBack.addActionListener(new ActionListener() {
+		// 	public void actionPerformed(ActionEvent e) {
+		// 		mainMenu.setVisible(true);
+		// 		reservationCheckoutMenu.setVisible(false);
+		// 	}
+		// });
+		// reservationCheckOutBack.setBounds(555, 367, 115, 29);
+		// reservationCheckoutMenu.add(reservationCheckOutBack);
+		//
+		// JButton reservationCheckOut = new JButton("Check Out");
+		// reservationCheckOut.setBounds(334, 124, 146, 29);
+		// reservationCheckoutMenu.add(reservationCheckOut);
 	}
 }
